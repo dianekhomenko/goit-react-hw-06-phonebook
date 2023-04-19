@@ -40,7 +40,9 @@ export class App extends Component {
           color: '#010101',
         }}
       >
+        <h1>Phonebook</h1>
         <ContactForm onSave={this.addContact} />
+        <h2>Contacts</h2>
         <Filter value={filter} onChange={this.changeFilter} />
         <Contacts items={filteredContacts} />
       </div>

@@ -18,7 +18,6 @@ function validatePhone(value) {
 export const ContactForm = ({onSave}) => {
     return (
       <div>
-        <h2>Phonebook</h2>
         <Formik
           initialValues={{
             name: '',
