@@ -2,6 +2,7 @@ import { ContactForm } from 'components/ContactForm/ContactForm'
 import {Contacts} from 'components/Contacts/Contacts'
 import { Component } from 'react'
 import { Filter } from './Filter/Filter';
+import { Layout } from './Layout/Layout';
 
 export class App extends Component {
   state = {
@@ -29,23 +30,13 @@ export class App extends Component {
     );
 
     return (
-      <div
-        style={{
-          height: '100vh',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: 20,
-          color: '#010101',
-        }}
-      >
+      <Layout>
         <h1>Phonebook</h1>
         <ContactForm onSave={this.addContact} />
         <h2>Contacts</h2>
         <Filter value={filter} onChange={this.changeFilter} />
         <Contacts items={filteredContacts} />
-      </div>
+      </Layout>
     );
   }
 };

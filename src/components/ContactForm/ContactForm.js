@@ -1,5 +1,6 @@
 import { Formik, Field, Form } from 'formik';
 import { nanoid } from 'nanoid';
+// import {FormikForm as Form} from 'components/ContactForm/ContactForm.styled'
 
 function validatePhone(value) {
    let error;
