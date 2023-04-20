@@ -1,6 +1,6 @@
-import { ContactForm } from 'components/ContactForm/ContactForm'
-import {Contacts} from 'components/Contacts/Contacts'
-import { Component } from 'react'
+import { ContactForm } from 'components/ContactForm/ContactForm';
+import { Contacts } from 'components/Contacts/Contacts';
+import { Component } from 'react';
 import { Filter } from './Filter/Filter';
 import { Layout } from './Layout/Layout';
 
@@ -11,15 +11,21 @@ export class App extends Component {
   };
 
   addContact = newContact => {
-    this.setState(prevState => ({
-      contacts: [ ...prevState.contacts, newContact ],
-    }));
+    if (
+      this.state.contacts.filter(contact => contact.name === newContact.name)
+        .length !== 0
+    ) {
+      alert(`${newContact.name} is already in contacts.`);
+    } else {
+      this.setState(prevState => ({
+        contacts: [...prevState.contacts, newContact],
+      }));
+    }
   };
 
   changeFilter = e => {
-    this.setState ({filter: e.currentTarget.value})
-
-  }  
+    this.setState({ filter: e.currentTarget.value });
+  };
 
   render() {
     const { filter } = this.state;
@@ -39,4 +45,4 @@ export class App extends Component {
       </Layout>
     );
   }
-};
+}
