@@ -1,6 +1,6 @@
 import { Contact } from "./Contacts.styled";
 
-export const Contacts = ({ items }) => {
+export const Contacts = ({ items, onDelete }) => {
     return (
       <ul>
         {items.map(item => {
@@ -8,6 +8,7 @@ export const Contacts = ({ items }) => {
               <Contact key={item.id}>
                 <p>{item.name}:</p>
                 <p>{item.phone}</p>
+                <button onClick={() => onDelete(item.id)}>x</button>
               </Contact>
             );
         })}
