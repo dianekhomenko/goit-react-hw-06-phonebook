@@ -1,6 +1,7 @@
 import { Formik, Field } from 'formik';
 import { nanoid } from 'nanoid';
 import { Form } from 'components/ContactForm/ContactForm.styled';
+import PropTypes from 'prop-types';
 
 function validatePhone(value) {
   let error;
@@ -45,3 +46,7 @@ export const ContactForm = ({ onSave }) => {
     </div>
   );
 };
+
+ContactForm.propTypes = {
+  onSave: PropTypes.func,
+}
