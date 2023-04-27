@@ -3,18 +3,26 @@ import { nanoid } from 'nanoid';
 import { Form } from 'components/ContactForm/ContactForm.styled';
 import PropTypes from 'prop-types';
 
+function errorAlert(error) {
+  if (error) {
+    alert(error)
+  }
+}
+
 function validatePhone(value) {
   let error;
   if (!value) {
     error = 'Required';
-  } else if (
+  } else
+    if (
     !/\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/i.test(
       value
     )
   ) {
     error = 'Invalid phone';
-  }
-  return error;
+    }
+  errorAlert(error);
+  return (error);
 }
 
 export const ContactForm = ({ onSave }) => {
@@ -29,6 +37,8 @@ export const ContactForm = ({ onSave }) => {
           onSave({ ...values, id: nanoid() });
           actions.resetForm();
         }}
+        validateOnChange={false}
+        validateOnBlur={false}
       >
         <Form>
           <label htmlFor="name">Name</label>
