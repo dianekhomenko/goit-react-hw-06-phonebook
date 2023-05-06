@@ -1,5 +1,6 @@
 import { ContactForm } from 'components/ContactForm/ContactForm';
 import { Contacts } from 'components/Contacts/Contacts';
+import { useMemo } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Filter } from './Filter/Filter';
@@ -39,10 +40,12 @@ export const App = () => {
     );
   };
 
-  const normalizedFilter = filters.toLowerCase();
-
-  const filteredContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(normalizedFilter)
+  const filteredContacts = useMemo(
+    () =>
+      contacts.filter(contact =>
+        contact.name.toLowerCase().includes(filters.toLowerCase())
+      ),
+    [filters, contacts]
   );
 
   return (
