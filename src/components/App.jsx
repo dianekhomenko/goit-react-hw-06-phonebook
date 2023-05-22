@@ -2,7 +2,6 @@ import { ContactForm } from 'components/ContactForm/ContactForm';
 import { Contacts } from 'components/Contacts/Contacts';
 import { useMemo } from 'react';
 import { useEffect } from 'react';
-import { useState } from 'react';
 import { Filter } from './Filter/Filter';
 import { Layout } from './Layout/Layout';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,10 +9,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 export const App = () => {
 
-  const { contacts } = useSelector((state) => state) 
+  const { contacts, filters } = useSelector((state) => state) 
   const dispatch = useDispatch();
-
-  const [filters, setFilters] = useState('');
 
   useEffect(() => {
     localStorage.setItem('contacts', JSON.stringify(contacts));
@@ -30,7 +27,7 @@ export const App = () => {
   };
 
   const changeFilter = e => {
-    setFilters(e.currentTarget.value);
+    dispatch({ type: 'setFilters', payload: e.currentTarget.value })
   };
 
   const deleteContact = contactId => {

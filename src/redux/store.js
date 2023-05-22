@@ -33,6 +33,6 @@ function initialContacts()  {
 
 
 export const store = createStore(reduser, {
-  contacts: initialContacts,
+  contacts: initialContacts(),
   filter: '',
 });
