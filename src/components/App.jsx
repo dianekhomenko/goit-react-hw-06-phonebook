@@ -1,6 +1,5 @@
 import { ContactForm } from 'components/ContactForm/ContactForm';
 import { Contacts } from 'components/Contacts/Contacts';
-import { useMemo } from 'react';
 import { useEffect } from 'react';
 import { Filter } from './Filter/Filter';
 import { Layout } from './Layout/Layout';
@@ -9,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 export const App = () => {
 
-  const { contacts, filters } = useSelector((state) => state) 
+  const { contacts, filter } = useSelector((state) => state) 
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,19 +26,15 @@ export const App = () => {
   };
 
   const changeFilter = e => {
-    dispatch({ type: 'setFilters', payload: e.currentTarget.value })
+    dispatch({ type: 'setFilter', payload: e.currentTarget.value })
   };
 
   const deleteContact = contactId => {
     dispatch({type: 'deleteContact', payload: contactId})
   };
 
-  const filteredContacts = useMemo(
-    () =>
-      contacts.filter(contact =>
-        contact.name.toLowerCase().includes(filters.toLowerCase())
-      ),
-    [filters, contacts]
+  const filteredContacts = contacts.filter(contact =>
+    contact.name.toLowerCase().includes(filter.toLowerCase())
   );
 
   return (
@@ -48,7 +43,7 @@ export const App = () => {
       <ContactForm onSave={addContact} />
       <h2>Contacts</h2>
       {contacts.length > 0 ? (
-        <Filter value={filters} onChange={changeFilter} />
+        <Filter value={filter} onChange={changeFilter} />
       ) : (
         <p>There is no contacts</p>
       )}
