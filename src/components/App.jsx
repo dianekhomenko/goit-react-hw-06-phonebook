@@ -5,14 +5,13 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { Filter } from './Filter/Filter';
 import { Layout } from './Layout/Layout';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 export const App = () => {
-  const [contacts, setContacts] = useState(() => {
-    const savedContacts = localStorage.getItem('contacts');
-    if (savedContacts !== null) {
-      return JSON.parse(savedContacts);
-    }
-  });
+
+  const { contacts } = useSelector((state) => state) 
+  const dispatch = useDispatch();
 
   const [filters, setFilters] = useState('');
 
@@ -26,7 +25,7 @@ export const App = () => {
     ) {
       alert(`${newContact.name} is already in contacts.`);
     } else {
-      setContacts(prevState => [...prevState, newContact]);
+      dispatch({ type: 'setContacts', payload: newContact });
     }
   };
 
@@ -35,9 +34,7 @@ export const App = () => {
   };
 
   const deleteContact = contactId => {
-    setContacts(prevState =>
-      prevState.filter(contact => contact.id !== contactId)
-    );
+    dispatch({type: 'deleteContact', payload: contactId})
   };
 
   const filteredContacts = useMemo(
