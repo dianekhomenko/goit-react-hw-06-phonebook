@@ -1,4 +1,4 @@
-import { createStore } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 
 const reduser = ( state, action ) => {
     switch (action.type) {
@@ -32,7 +32,7 @@ function initialContacts()  {
 }
 
 
-export const store = createStore(reduser, {
+export const store = configureStore(reduser, {
   contacts: initialContacts(),
   filter: '',
 });

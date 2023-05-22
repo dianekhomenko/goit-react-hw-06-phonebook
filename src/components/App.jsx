@@ -5,7 +5,6 @@ import { Filter } from './Filter/Filter';
 import { Layout } from './Layout/Layout';
 import { useDispatch, useSelector } from 'react-redux';
 
-
 export const App = () => {
 
   const { contacts, filter } = useSelector((state) => state) 
