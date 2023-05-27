@@ -1,21 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-// function initialContacts() {
-//   let savedContacts = localStorage.getItem('contacts');
-//   if (savedContacts !== null) {
-//     return JSON.parse(savedContacts);
-//   }
-// }
-
 const contactSlice = createSlice({
   name: 'contacts',
   initialState: [],
   reducers: {
     setContacts(state, action) {
-      return [...state, action.payload];
+      state.items = [...state.items, action.payload];
     },
-    deleteContact(state, action) {
-      return state.filter(items => items.id !== action.payload);
+    deleteContact (state, action) {
+      state.items = state.items.filter(item => item.id !== action.payload);
     },
   },
 });

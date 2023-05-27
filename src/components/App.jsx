@@ -7,7 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setContacts, deleteContact, setFilter } from 'redux/redusers';
 
 export const App = () => {
-  const { contacts, filter } = useSelector(state => state);
+  const contacts = useSelector(state => state.contacts.items);
+  const filter = useSelector(state => state.filter);
   const dispatch = useDispatch();
 
   useEffect(() => {
