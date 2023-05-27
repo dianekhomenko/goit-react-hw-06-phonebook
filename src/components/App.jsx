@@ -4,10 +4,10 @@ import { useEffect } from 'react';
 import { Filter } from './Filter/Filter';
 import { Layout } from './Layout/Layout';
 import { useDispatch, useSelector } from 'react-redux';
+import { setContacts, deleteContact, setFilter } from 'redux/redusers';
 
 export const App = () => {
-
-  const { contacts, filter } = useSelector((state) => state) 
+  const { contacts, filter } = useSelector(state => state);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -20,16 +20,16 @@ export const App = () => {
     ) {
       alert(`${newContact.name} is already in contacts.`);
     } else {
-      dispatch({ type: 'setContacts', payload: newContact });
+      dispatch(setContacts(newContact));
     }
   };
 
   const changeFilter = e => {
-    dispatch({ type: 'setFilter', payload: e.currentTarget.value })
+    dispatch(setFilter(e.currentTarget.value) );
   };
 
-  const deleteContact = contactId => {
-    dispatch({type: 'deleteContact', payload: contactId})
+  const deleteContacts = contactId => {
+    dispatch(deleteContact(contactId));
   };
 
   const filteredContacts = contacts.filter(contact =>
@@ -46,7 +46,7 @@ export const App = () => {
       ) : (
         <p>There is no contacts</p>
       )}
-      <Contacts items={filteredContacts} onDelete={deleteContact} />
+      <Contacts items={filteredContacts} onDelete={deleteContacts} />
     </Layout>
   );
 };
