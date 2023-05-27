@@ -15,22 +15,17 @@ const contactSlice = createSlice({
       state.push(action.payload);
     },
     deleteContact(state, action) {
-      state.contacts = state.contacts.filter(contact => contact.id !== action.payload);
+      state.filter(items => items.id !== action.payload);
     },
   },
 });
 
-export const filterSlice = createSlice({
+const filterSlice = createSlice({
   name: 'filter',
   initialState: '',
   reducers: {
     setFilter(state, action) {
-      return {
-        ...state,
-        contacts: state.contacts.filter(
-          contact => contact.id !== action.payload
-        ),
-      };
+      state.filter(contact => contact.id !== action.payload);
     },
   },
 });
