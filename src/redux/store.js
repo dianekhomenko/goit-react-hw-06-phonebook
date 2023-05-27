@@ -5,5 +5,5 @@ export const store = configureStore({
   reducer: {
     contacts: contactReducer,
     filter: filterReducer,
-  }
+  },
 });

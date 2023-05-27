@@ -25,7 +25,7 @@ export const App = () => {
   };
 
   const changeFilter = e => {
-    dispatch(setFilter(e.currentTarget.value) );
+    dispatch(setFilter(e.currentTarget.value));
   };
 
   const deleteContacts = contactId => {
