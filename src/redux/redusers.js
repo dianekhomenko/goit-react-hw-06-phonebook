@@ -1,15 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-function initialContacts() {
-  let savedContacts = localStorage.getItem('contacts');
-  if (savedContacts !== null) {
-    return JSON.parse(savedContacts);
-  }
-}
+// function initialContacts() {
+//   let savedContacts = localStorage.getItem('contacts');
+//   if (savedContacts !== null) {
+//     return JSON.parse(savedContacts);
+//   }
+// }
 
 const contactSlice = createSlice({
   name: 'contacts',
-  initialState: initialContacts(),
+  initialState: [],
   reducers: {
     setContacts(state, action) {
       return [...state, action.payload];
