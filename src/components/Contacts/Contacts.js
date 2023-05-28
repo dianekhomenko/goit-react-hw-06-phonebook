@@ -1,7 +1,14 @@
 import { Contact } from "./Contacts.styled";
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
-export const Contacts = ({ items, onDelete }) => {
+export const Contacts = ({ onDelete }) => {
+  const contacts = useSelector(state => state.contacts.items);
+  const filter = useSelector(state => state.filter);
+  const items = contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+  );
+  
     return (
       <ul>
         {items.map(item => {
@@ -18,6 +25,5 @@ export const Contacts = ({ items, onDelete }) => {
 };
 
 Contacts.propTypes = {
-  items: PropTypes.array,
   onDelete: PropTypes.func,
 };

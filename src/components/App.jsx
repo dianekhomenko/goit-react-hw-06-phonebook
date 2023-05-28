@@ -8,7 +8,6 @@ import { setContacts, deleteContact, setFilter } from 'redux/redusers';
 
 export const App = () => {
   const contacts = useSelector(state => state.contacts.items);
-  const filter = useSelector(state => state.filter);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -33,21 +32,17 @@ export const App = () => {
     dispatch(deleteContact(contactId));
   };
 
-  const filteredContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filter.toLowerCase())
-  );
-
   return (
     <Layout>
       <h1>Phonebook</h1>
       <ContactForm onSave={addContact} />
       <h2>Contacts</h2>
       {contacts.length > 0 ? (
-        <Filter value={filter} onChange={changeFilter} />
+        <Filter onChange={changeFilter} />
       ) : (
         <p>There is no contacts</p>
       )}
-      <Contacts items={filteredContacts} onDelete={deleteContacts} />
+      <Contacts onDelete={deleteContacts} />
     </Layout>
   );
 };
