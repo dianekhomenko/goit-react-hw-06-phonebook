@@ -1,11 +1,12 @@
 import { Formik, Field } from 'formik';
 import { nanoid } from 'nanoid';
 import { Form } from 'components/ContactForm/ContactForm.styled';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { setContacts } from 'redux/redusers';
 
 function errorAlert(error) {
   if (error) {
-    alert(error)
+    alert(error);
   }
 }
 
@@ -13,19 +14,30 @@ function validatePhone(value) {
   let error;
   if (!value) {
     error = 'Required';
-  } else
-    if (
+  } else if (
     !/\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/i.test(
       value
     )
   ) {
     error = 'Invalid phone';
-    }
+  }
   errorAlert(error);
-  return (error);
+  return error;
 }
 
-export const ContactForm = ({ onSave }) => {
+export const ContactForm = () => {
+  const contacts = useSelector(state => state.contacts.items);
+  const dispatch = useDispatch();
+  const addContact = newContact => {
+    if (
+      contacts.filter(contact => contact.name === newContact.name).length !== 0
+    ) {
+      alert(`${newContact.name} is already in contacts.`);
+    } else {
+      dispatch(setContacts(newContact));
+    }
+  };
+
   return (
     <div>
       <Formik
@@ -34,7 +46,7 @@ export const ContactForm = ({ onSave }) => {
           phone: '',
         }}
         onSubmit={(values, actions) => {
-          onSave({ ...values, id: nanoid() });
+          addContact({ ...values, id: nanoid() });
           actions.resetForm();
         }}
         validateOnChange={false}
@@ -56,7 +68,3 @@ export const ContactForm = ({ onSave }) => {
     </div>
   );
 };
-
-ContactForm.propTypes = {
-  onSave: PropTypes.func,
-}
